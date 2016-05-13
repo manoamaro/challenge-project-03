@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root "messages#index"
+
+  post 'messages/archive_all(.:format)', as: :archive_all_messages
+
   resources :messages, except: :destroy do
     member do
       put :archive

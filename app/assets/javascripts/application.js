@@ -16,6 +16,7 @@
 //= require spark
 //= require pages/messages/index
 //= require pages/messages/index/archiveMessage
+//= require pages/messages/index/archiveAllMessages
 
 $(function() {
   Spark.init();
