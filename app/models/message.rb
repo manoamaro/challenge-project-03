@@ -16,4 +16,9 @@ class Message < ActiveRecord::Base
       message.read_at = Time.current
     end
   end
+
+  def self.archive_all!
+    Message.where.not(state: 'archived').find_each(&:archive)
+  end
+
 end
