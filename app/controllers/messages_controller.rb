@@ -62,6 +62,17 @@ class MessagesController < ApplicationController
     end
   end
 
+
+  # POST /messages/archive_all
+  # POST /messages/archive_all
+  def archive_all
+    Message.archive_all!
+    respond_to do |format|
+      format.html { redirect_to messages_url, notice: 'Mensagens removidas.' }
+      format.json { head :ok }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
