@@ -48,4 +48,13 @@ class MessagesControllerTest < ActionController::TestCase
 
     assert_redirected_to messages_path
   end
+
+  test "should archive all messages" do
+    post :archive_all
+
+    assert_equal 2, Message.where(state: 'archived').count
+
+    assert_redirected_to messages_path
+  end
+
 end
