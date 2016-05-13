@@ -29,19 +29,26 @@ class MessageTest < ActiveSupport::TestCase
     message = messages(:one)
 
     assert message.unread?
+    assert !message.read_at.present?
+
     message.read
 
     assert message.read?
     assert message.read_at.present?
+    assert message.reload.read_at.present?
   end
 
   test "archiving a message" do
     message = messages(:one)
 
     assert !message.archived?
+    assert !message.archived_at.present?
+
     message.archive
 
     assert message.archived?
+    assert message.archived_at.present?
+    assert message.reload.archived_at.present?
   end
 
   test "archiving all messages" do
@@ -51,6 +58,8 @@ class MessageTest < ActiveSupport::TestCase
     Message.archive_all!
 
     assert_equal 2, Message.where(state: 'archived').count
+
+    Message.find_each {|message| assert message.reload.archived_at.present?}
   end
 
 end

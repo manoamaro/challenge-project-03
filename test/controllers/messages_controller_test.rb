@@ -28,6 +28,7 @@ class MessagesControllerTest < ActionController::TestCase
     assert @message.reload.unread?
     get :show, id: @message
     assert @message.reload.read?
+    assert @message.reload.read_at.present?
     assert_response :success
   end
 
@@ -45,6 +46,7 @@ class MessagesControllerTest < ActionController::TestCase
     patch :archive, id: @message
 
     assert @message.reload.archived?
+    assert @message.reload.archived_at.present?
 
     assert_redirected_to messages_path
   end
@@ -53,6 +55,7 @@ class MessagesControllerTest < ActionController::TestCase
     post :archive_all
 
     assert_equal 2, Message.where(state: 'archived').count
+    Message.find_each {|message| assert message.reload.archived_at.present?}
 
     assert_redirected_to messages_path
   end
