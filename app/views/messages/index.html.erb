@@ -3,11 +3,12 @@
 <h1>Caixa de mensagens</h1>
 
 <p class="actions">
+  <%= link_to 'Remover todas', archive_all_messages_path, class: "btn btn-danger", id: 'js-archive-all-messages-btn'  %>
   <%= link_to 'Escrever mensagem', new_message_path, class: "btn btn-primary"  %>
 </p>
 
 <table class="table">
-  <tbody>
+  <tbody id="messages-tb">
     <% @messages.each do |message| %>
       <tr>
         <td class="message--<%= message.state %>">
@@ -22,4 +23,3 @@
 </table>
 
 <br>
-

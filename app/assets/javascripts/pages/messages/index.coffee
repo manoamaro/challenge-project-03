@@ -7,3 +7,5 @@ class App.messages.index
 
   make: () ->
     new App.messages.index.archiveMessage
+    new App.messages.index.archiveAllMessages
+    return
